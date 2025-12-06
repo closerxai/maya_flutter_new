@@ -812,7 +812,14 @@ class _HomePageState extends State<HomePage> {
                     else if (todos.isEmpty)
                       _buildEmptySection('No to-dos')
                     else
-                      ...todos.take(3).map((todo) => _buildTodoCard(todo)),
+                      ...todos.take(3).map((todo) => Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Container(
+                          height: 120,
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: Color(0xffF8F8F8),),
+
+                            child: _buildTodoCard(todo)),
+                      )),
 
                     const SizedBox(height: 120),
                   ],
@@ -837,15 +844,15 @@ class _HomePageState extends State<HomePage> {
             title,
             style: TextStyle(
               color: AppColors.balckClr,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
             ),
           ),
           TextButton(
             onPressed: onPressed,
             child: Text(
               'View all',
-              style: TextStyle(color: Colors.black54, fontSize: 14),
+              style: TextStyle(color: Color(0xff6D6D6D), fontSize: 14),
             ),
           ),
         ],
@@ -859,12 +866,12 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         padding: const EdgeInsets.all(30),
         decoration: BoxDecoration(
-          color: AppColors.whiteClr,
+          color: AppColors.cardColor,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.borderColor),
+          // border: Border.all(color: AppColors.borderColor),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
+              color: Colors.grey.withOpacity(0.0),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -919,11 +926,14 @@ class _HomePageState extends State<HomePage> {
       String s => int.tryParse(s) ?? 0,
       _ => 0,
     };
-    return TodoCard(
-      title: todo['title'] ?? 'Untitled',
-      subtitle: todo['description'] ?? 'No description',
-      progress: progress.clamp(0, 100),
-      onTap: () => completeToDo(todo),
+    return Padding(
+      padding: const EdgeInsets.only(top: 7),
+      child: TodoCard(
+        title: todo['title'] ?? 'Untitled',
+        subtitle: todo['description'] ?? 'No description',
+        progress: progress.clamp(0, 100),
+        onTap: () => completeToDo(todo),
+      ),
     );
   }
 
@@ -1287,24 +1297,36 @@ class TaskCard extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  width: 8,
-                  height: 8,
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: color,
+                    color: color.withOpacity(0.10),  // Light background
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  status,
-                  style: TextStyle(
-                    color: color,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: color,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        status,
+                        style: TextStyle(
+                          color: color,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
+
             const SizedBox(height: 6),
             Text(
               title,
@@ -1327,7 +1349,7 @@ class TaskCard extends StatelessWidget {
                 const Spacer(),
                 const Icon(
                   Icons.arrow_forward,
-                  color: Colors.black54,
+                  color: Color(0xff374957),
                   size: 16,
                 ),
               ],
@@ -1361,10 +1383,10 @@ class TodoCard extends StatelessWidget {
         ? AppColors.primary
         : AppColors.redColor;
     return Container(
-      margin: const EdgeInsets.only(left: 20, right: 20, bottom: 12),
+      margin: const EdgeInsets.only(left: 15, right: 15, bottom: 5),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.cardColor,
+        color: Color(0xffF2F3F4),
         borderRadius: BorderRadius.circular(13),
         // border: Border.all(color: AppColors.borderColor),
         boxShadow: [
@@ -1383,7 +1405,7 @@ class TodoCard extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  Icons.check_circle_outline,
+                  Icons.people,
                   color: AppColors.balckClr,
                   size: 24,
                 ),
@@ -1537,12 +1559,12 @@ Widget _skeletonCard() {
     margin: const EdgeInsets.only(left: 20, right: 20, bottom: 12),
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: AppColors.whiteClr,
+      color: AppColors.cardColor,
       borderRadius: BorderRadius.circular(16),
-      border: Border.all(color: AppColors.borderColor),
+      // border: Border.all(color: AppColors.borderColor),
       boxShadow: [
         BoxShadow(
-          color: Colors.grey.withOpacity(0.1),
+          color: Colors.grey.withOpacity(0.0),
           blurRadius: 8,
           offset: const Offset(0, 4),
         ),

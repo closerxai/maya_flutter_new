@@ -8,6 +8,11 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
 android {
     namespace = "com.ravan.maya"
     compileSdk = 36
@@ -40,7 +45,7 @@ isCoreLibraryDesugaringEnabled = true
     create("customDebug") {
         keyAlias = "tushar"
         keyPassword = "tushar"
-        storeFile = file("upload-keystore.jks")
+        storeFile = file("mayaai.jks")
         storePassword = "tushar"
     }
 }
@@ -56,7 +61,7 @@ isCoreLibraryDesugaringEnabled = true
         )
     }
     getByName("debug") {
-        signingConfig = signingConfigs.getByName("customDebug")
+//        signingConfig = signingConfigs.getByName("customDebug")
     }
 }
 

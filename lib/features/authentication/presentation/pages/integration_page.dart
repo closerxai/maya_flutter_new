@@ -905,7 +905,6 @@ class _IntegrationsPageState extends State<IntegrationsPage>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ------ MAIN ROW (icon, text, switch)
             Row(
               children: [
                 Container(
@@ -966,15 +965,7 @@ class _IntegrationsPageState extends State<IntegrationsPage>
                   ),
                 ),
 
-                Switch(
-                  value: integration.connected,
-                  onChanged: (value) async {
-                    await _onToggleIntegration(integration, value);
-                    setState(() {
-                      integration.connected = value;
-                    });
-                  },
-                ),
+
               ],
             ),
 
@@ -992,10 +983,24 @@ class _IntegrationsPageState extends State<IntegrationsPage>
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Icon(Icons.settings, size: 18, color: Colors.grey),
-                    SizedBox(width: 8),
-                    Text('Manage', style: TextStyle(color: Colors.grey)),
+                  children: [
+                    const Icon(Icons.settings, size: 18, color: Color(0xff6D6D6D)),
+                    const SizedBox(width: 8),
+                    const Text('Manage', style: TextStyle(color: Color(0xff6D6D6D))),
+                    const Spacer(),
+                    Container(
+                      height: 0,
+
+                      child: Switch(
+                        value: integration.connected,
+                        onChanged: (value) async {
+                          await _onToggleIntegration(integration, value);
+                          setState(() {
+                            integration.connected = value;
+                          });
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -1033,7 +1038,7 @@ class _IntegrationsPageState extends State<IntegrationsPage>
             ),
           ],
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.bgColor,
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,

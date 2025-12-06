@@ -85,8 +85,6 @@ class _TabLayoutState extends State<TabLayout> {
       );
       return;
     }
-
-    // Exit the app
     SystemNavigator.pop();
   }
 

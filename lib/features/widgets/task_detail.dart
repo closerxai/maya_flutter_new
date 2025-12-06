@@ -144,10 +144,26 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
     }
   }
 
+
+bool isStatus = false;
+
+
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+    Color textColor = Colors.green;
+
+    if (isStatus) {
+      final lower = _status.toLowerCase();
+      if (lower.contains('complete')) {
+        textColor = Colors.green.shade700;
+      } else if (lower.contains('fail')) {
+        textColor = Colors.red.shade700;
+      } else if (lower.contains('progress') || lower.contains('running')) {
+        textColor = AppColors.primary;
+      }
     }
     if (_errorMessage != null) {
       return Scaffold(
@@ -172,12 +188,12 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
             'Task Detail',
             style: TextStyle(color: AppColors.balckClr, fontSize: 18),
           ),
-          backgroundColor: AppColors.whiteClr,
+          backgroundColor: AppColors.bgColor,
           elevation: 0,
         ),
         backgroundColor: AppColors.bgColor,
         body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -202,51 +218,68 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
               const SizedBox(height: 10),
 
               // Title
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: 320,
-                    child: Text(
-                      _title,
-                      maxLines: 2,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        overflow: TextOverflow.ellipsis,
-                        fontWeight: FontWeight.bold,
-                      ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Title
+              Expanded(
+                child: Text(
+                  _title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              // Status Badge
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: textColor.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    _status,
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                  // Text("${_status}")
-                ],
-              ),
+                ),
+            ],
+          ),
 
-              const SizedBox(height: 10),
-              _buildInfoRow(
-                Icons.calendar_today,
-                'Due Date',
-                DateFormat.yMMMd().format(DateTime.parse(_createdAt).toLocal()) // "Nov 30, 2025"
-              ),
 
-              _buildInfoRow(
-                Icons.access_time,
-                'Time',
-                DateFormat.jm().format(DateTime.parse(_createdAt).toLocal()),
-              ),
-              _buildInfoRow(
-                Icons.assignment,
-                'Task Status', _status,
-                isStatus: true,
-              ),
+          // const SizedBox(height: 10),
+              // _buildInfoRow(
+              //   Icons.calendar_today,
+              //   'Due Date',
+              //   DateFormat.yMMMd().format(DateTime.parse(_createdAt).toLocal()) // "Nov 30, 2025"
+              // ),
+              //
+              // _buildInfoRow(
+              //   Icons.access_time,
+              //   'Time',
+              //   DateFormat.jm().format(DateTime.parse(_createdAt).toLocal()),
+              // ),
+              // _buildInfoRow(
+              //   Icons.assignment,
+              //   'Task Status', _status,
+              //   isStatus: true,
+              // ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 5),
 
               // Sub-tasks
               ..._subtasks.map(
                 (subtask) =>
                     SubTaskCard(subtask: subtask, sessionId: _sessionId),
               ),
-
               const SizedBox(height: 40),
             ],
           ),
@@ -302,7 +335,6 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
   }
 }
 
-// Fully dynamic sub-task card with working tabs
 class SubTaskCard extends StatefulWidget {
   final Map<String, dynamic> subtask;
   final String? sessionId;
@@ -415,12 +447,12 @@ class _SubTaskCardState extends State<SubTaskCard>
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Color(0xffF8F8F8),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
+        // border: Border.all(color: Colors.grey.shade300),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.08),
+            color: Colors.grey.withOpacity(0.0),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -455,8 +487,8 @@ class _SubTaskCardState extends State<SubTaskCard>
                             ),
                             decoration: BoxDecoration(
                               color: active
-                                  ? AppColors.primary
-                                  : AppColors.borderColor,
+                                  ? Color(0xffF29452)
+                                  : AppColors.whiteClr,
                               borderRadius: BorderRadius.circular(10),
                               border: active
                                   ? null

@@ -381,7 +381,8 @@ Widget _tabButton(String title, bool active) {
               overflow: TextOverflow.ellipsis,
             ),
             
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
+            const Divider(color: Colors.black26),
             Row(
               children: [
                 const Icon(Icons.calendar_today_outlined,
@@ -395,6 +396,12 @@ Widget _tabButton(String title, bool active) {
                       fontSize: 13,
                       color: Colors.grey,
                       fontWeight: FontWeight.w500),
+                ),
+                const Spacer(),
+                const Icon(
+                  Icons.arrow_forward,
+                  color: Color(0xff374957),
+                  size: 16,
                 ),
               ],
             ),
