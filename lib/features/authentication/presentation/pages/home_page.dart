@@ -812,14 +812,17 @@ class _HomePageState extends State<HomePage> {
                     else if (todos.isEmpty)
                       _buildEmptySection('No to-dos')
                     else
-                      ...todos.take(3).map((todo) => Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: Container(
-                          height: 120,
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: Color(0xffF8F8F8),),
-
-                            child: _buildTodoCard(todo)),
-                      )),
+                      ...todos.take(3).map((todo) =>
+                      //     Padding(
+                      //   padding: const EdgeInsets.only(left: 10, right: 10),
+                      //   child: Container(
+                      //     height: 120,
+                      //       decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: Color(0xffF8F8F8),),
+                      //
+                      //       child: _buildTodoCard(todo)),
+                      // ),
+                      _buildTodoCard(todo)
+                      ),
 
                     const SizedBox(height: 120),
                   ],
@@ -1233,18 +1236,22 @@ class _VoiceChatCardState extends State<VoiceChatCard> {
                   ),
 
                 // Mic / End Call Button
-                GestureDetector(
-                  onTap: _isConnecting ? null : _toggleConnection,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: _isConnected ? Colors.red : Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      _isConnected ? Icons.call_end : Icons.mic,
-                      color: _isConnected ? Colors.white : AppColors.primary,
-                      size: 22,
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: GestureDetector(
+                    onTap: _isConnecting ? null : _toggleConnection,
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: _isConnected ? Colors.red : Colors.transparent,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Color(0xffFFFFFF).withOpacity(0.3))
+                      ),
+                      child: Icon(
+                        _isConnected ? Icons.call_end : Icons.mic,
+                        color: _isConnected ? Colors.white : AppColors.whiteClr,
+                        size: 22,
+                      ),
                     ),
                   ),
                 ),
@@ -1386,7 +1393,7 @@ class TodoCard extends StatelessWidget {
       margin: const EdgeInsets.only(left: 15, right: 15, bottom: 5),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Color(0xffF2F3F4),
+        color: AppColors.cardColor,
         borderRadius: BorderRadius.circular(13),
         // border: Border.all(color: AppColors.borderColor),
         boxShadow: [
