@@ -615,7 +615,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -625,8 +625,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 InkWell(
                   onTap: () => context.pop(),
                   child: Container(
-                    height: 35,
-                    width: 35,
+                    height: 40,
+                    width: 40,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Color(0xffF8F8F8),
@@ -732,20 +732,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
 
                   // REMOVE PICTURE BUTTON
-                  if (_avatarUrl != null && _avatarUrl!.isNotEmpty) ...[
-                    const SizedBox(width: 8),
-                    GestureDetector(
-                      onTap: _isUploadingAvatar ? null : _removeProfilePicture,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: Colors.red.shade600,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Icon(Icons.delete, color: Colors.white),
-                      ),
-                    ),
-                  ],
+                  // if (_avatarUrl != null && _avatarUrl!.isNotEmpty) ...[
+                  //   const SizedBox(width: 8),
+                  //   GestureDetector(
+                  //     onTap: _isUploadingAvatar ? null : _removeProfilePicture,
+                  //     child: Container(
+                  //       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+                  //       decoration: BoxDecoration(
+                  //         color: Colors.red.shade600,
+                  //         borderRadius: BorderRadius.circular(20),
+                  //       ),
+                  //       child: const Icon(Icons.delete, color: Colors.white),
+                  //     ),
+                  //   ),
+                  // ],
                 ],
               ),
             ),

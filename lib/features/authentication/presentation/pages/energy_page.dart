@@ -25,14 +25,12 @@ class _EnergyPageState extends State<EnergyPage> {
             children: [
               Row(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      context.pop();
-                    },
-                    child: const Icon(
-                      Icons.arrow_back,
-                      size: 24,
-                      color: Colors.black87,
+                  CircleAvatar(
+                    backgroundColor:AppColors.cardColor,
+                    radius: 20,
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back, color: AppColors.balckClr),
+                      onPressed: () => context.pop(),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -180,10 +178,10 @@ class _EnergyPageState extends State<EnergyPage> {
   ) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(17),
         decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(16),
+          color: Color(0xffF2F3F4),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,7 +189,7 @@ class _EnergyPageState extends State<EnergyPage> {
             Text(
               title,
               style: TextStyle(
-                color: textColor,
+                color: Color(0xffF59E0B),
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
               ),
@@ -200,7 +198,7 @@ class _EnergyPageState extends State<EnergyPage> {
             Text(
               "$value",
               style: TextStyle(
-                color: textColor,
+                color: Color(0xffF59E0B),
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),

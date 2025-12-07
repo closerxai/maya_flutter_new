@@ -272,11 +272,18 @@ class _RemindersPageState extends State<RemindersPage> {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(
-        backgroundColor: AppColors.whiteClr,
+        backgroundColor: AppColors.bgColor,
         elevation: 0,
-        leading: InkWell(
-          onTap: () => context.pop(),
-          child: const Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 18),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundColor:AppColors.cardColor,
+            radius: 20,
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back, color: AppColors.balckClr),
+              onPressed: () => context.pop(),
+            ),
+          ),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

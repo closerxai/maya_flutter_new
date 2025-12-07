@@ -990,16 +990,18 @@ class _IntegrationsPageState extends State<IntegrationsPage>
                     const Spacer(),
                     Container(
                       height: 0,
-
                       child: Switch(
                         value: integration.connected,
+                        activeColor: Color(0xffF97418),
+                        activeTrackColor: Color(0xffECB48D), // Track (background) color
                         onChanged: (value) async {
                           await _onToggleIntegration(integration, value);
                           setState(() {
                             integration.connected = value;
                           });
                         },
-                      ),
+                      )
+
                     ),
                   ],
                 ),
